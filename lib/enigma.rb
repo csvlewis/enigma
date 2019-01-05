@@ -1,3 +1,6 @@
+require './lib/key'
+require './lib/date'
+
 class Enigma
   def encrypt(message, key = rand(10 ** 5).to_s.rjust(5,'0'), date = Time.now.strftime("%d%m%y"))
     key = Key.new(key)
