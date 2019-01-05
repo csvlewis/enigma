@@ -1,5 +1,5 @@
 class Enigma
-  def encrypt(message, key, date)
+  def encrypt(message, key = rand(10 ** 5).to_s.rjust(5,'0'), date = Time.now.strftime("%d%m%y"))
     key = Key.new(key)
     date = Date.new(date)
     alphabet = ("a".."z").to_a << " "
@@ -13,7 +13,7 @@ class Enigma
     shift_num = 0
     until message[loop_num].nil? do
       letter = message[loop_num]
-      index = alphabet.index(letter)
+      index = alphabet.index(letter.downcase)
       if index.nil?
         new_letter = letter
       else
@@ -44,7 +44,7 @@ class Enigma
     hash
   end
 
-  def decrypt(message, key, date)
+  def decrypt(message, key, date = Time.now.strftime("%d%m%y"))
     key = Key.new(key)
     date = Date.new(date)
     alphabet = ("a".."z").to_a << " "
@@ -58,7 +58,7 @@ class Enigma
     shift_num = 0
     until message[loop_num].nil? do
       letter = message[loop_num]
-      index = alphabet.index(letter)
+      index = alphabet.index(letter.downcase)
       if index.nil?
         new_letter = letter
       else
