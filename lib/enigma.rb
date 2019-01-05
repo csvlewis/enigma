@@ -1,15 +1,15 @@
 require './lib/key'
-require './lib/date'
+require './lib/offset'
 
 class Enigma
   def encrypt(message, key = rand(10 ** 5).to_s.rjust(5,'0'), date = Time.now.strftime("%d%m%y"))
     key = Key.new(key)
-    date = Date.new(date)
+    offset = Offset.new(date)
     alphabet = ("a".."z").to_a << " "
-    shift_a = key.subkey_a + date.offset_a
-    shift_b = key.subkey_b + date.offset_b
-    shift_c = key.subkey_c + date.offset_c
-    shift_d = key.subkey_d + date.offset_d
+    shift_a = key.subkey_a + offset.offset_a
+    shift_b = key.subkey_b + offset.offset_b
+    shift_c = key.subkey_c + offset.offset_c
+    shift_d = key.subkey_d + offset.offset_d
     message = message.split("")
     new_message = []
     loop_num = 0
@@ -42,19 +42,19 @@ class Enigma
     hash = {
     encryption: new_message,
     key: key.key,
-    date: date.date
+    date: offset.date
   }
     hash
   end
 
   def decrypt(message, key, date = Time.now.strftime("%d%m%y"))
     key = Key.new(key)
-    date = Date.new(date)
+    offset = Offset.new(date)
     alphabet = ("a".."z").to_a << " "
-    shift_a = key.subkey_a + date.offset_a
-    shift_b = key.subkey_b + date.offset_b
-    shift_c = key.subkey_c + date.offset_c
-    shift_d = key.subkey_d + date.offset_d
+    shift_a = key.subkey_a + offset.offset_a
+    shift_b = key.subkey_b + offset.offset_b
+    shift_c = key.subkey_c + offset.offset_c
+    shift_d = key.subkey_d + offset.offset_d
     message = message.split("")
     new_message = []
     loop_num = 0
@@ -87,7 +87,7 @@ class Enigma
     hash = {
     decryption: new_message,
     key: key.key,
-    date: date.date
+    date: offset.date
   }
     hash
   end
