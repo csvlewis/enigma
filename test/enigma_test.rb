@@ -29,7 +29,7 @@ class EnigmaTest < Minitest::Test
 
     assert_equal hash, enigma.decrypt("keder ohulw!", "02715", "040895")
   end
-
+  
   def test_it_can_encrypt_and_decrypt_messages_using_todays_date
     enigma = Enigma.new
     encrypted = enigma.encrypt("Hello world!", "02715")
