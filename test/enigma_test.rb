@@ -11,11 +11,22 @@ class EnigmaTest < Minitest::Test
   def test_it_can_encrypt_messages_with_key_and_date
     enigma = Enigma.new
     hash = {
-    encryption: "keder ohulw!",
-    key: "02715",
-    date: "040895"
-  }
-  
+      encryption: "keder ohulw!",
+      key: "02715",
+      date: "040895"
+    }
+
     assert_equal hash, enigma.encrypt("hello world!", "02715", "040895")
+  end
+
+  def test_it_can_decrypt_messages_with_key_and_date
+    enigma = Enigma.new
+    hash = {
+      decryption: "hello world!",
+      key: "02715",
+      date: "040895"
+    }
+
+    assert_equal hash, enigma.decrypt("keder ohulw!", "02715", "040895")
   end
 end
