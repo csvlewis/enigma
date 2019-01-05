@@ -1,4 +1,4 @@
-class Date
+class Offset
   attr_reader :date,
               :square,
               :digits,
