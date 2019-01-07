@@ -22,7 +22,7 @@ class CrackerTest < Minitest::Test
 
   def test_it_can_crack_key_with_todays_date
     enigma = Enigma.new
-    encrypted = enigma.encrypt("hello world end", "12345")
+    encrypted = enigma.encrypt("hello world end", "08215")
     offset = Offset.new(Time.now.strftime("%d%m%y"))
     cracker = Cracker.new(encrypted[:encryption], offset)
     cracker.crack

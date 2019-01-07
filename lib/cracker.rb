@@ -43,7 +43,7 @@ class Cracker
 
   def calculate_shift(encrypted, original)
     shift = @alphabet.index(encrypted) - @alphabet.index(original)
-    if shift.negative?
+    if shift < 1
       shift + 27
     else
       shift
