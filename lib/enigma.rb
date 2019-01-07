@@ -32,5 +32,12 @@ class Enigma
     offset = Offset.new(date)
     cracker = Cracker.new(message, offset)
     cracker.crack
+    encryptor = Encryptor.new(message, cracker.key, offset)
+    encryptor.decrypt
+    {
+      decryption: encryptor.new_message.join(""),
+      date: offset.date,
+      key: cracker.key.key
+    }
   end
 end
