@@ -27,4 +27,9 @@ class Enigma
     }
   end
 
+  def crack(message, date = Time.now.strftime("%d%m%y"))
+    offset = Offset.new(date)
+    cracker = Cracker.new(message, offset)
+    cracker.crack
+  end
 end
