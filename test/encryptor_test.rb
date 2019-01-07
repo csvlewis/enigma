@@ -12,6 +12,24 @@ class EncryptorTest < Minitest::Test
     assert_instance_of Encryptor, encryptor
   end
 
+  def test_it_has_an_alphabet
+  end
+
+  def test_it_can_calculate_shifts
+  end
+
+  def test_it_has_a_message_array
+  end
+
+  def test_it_starts_without_a_new_message
+  end
+
+  def test_loop_and_shift_num_start_at_0
+  end
+
+  def test_increase_shift_and_loop_count
+  end
+
   def test_it_can_encrypt_messages
     key = Key.new("02715")
     offset = Offset.new("040895")
