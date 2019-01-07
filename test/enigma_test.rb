@@ -29,7 +29,7 @@ class EnigmaTest < Minitest::Test
 
     assert_equal hash, enigma.decrypt("keder ohulw!", "02715", "040895")
   end
-  
+
   def test_it_can_encrypt_and_decrypt_messages_using_todays_date
     enigma = Enigma.new
     encrypted = enigma.encrypt("Hello world!", "02715")
@@ -58,5 +58,27 @@ class EnigmaTest < Minitest::Test
     }
 
     assert_equal hash, encrypted
+  end
+
+  def test_it_can_crack_with_a_date
+    enigma = Enigma.new
+    hash = {
+    decryption: "hello world end",
+    date: "291018",
+    key: "08304"
+  }
+
+    assert_equal hash, enigma.crack("vjqtbeaweqihssi", "291018")
+  end
+
+  def test_it_can_crack_using_todays_date
+    enigma = Enigma.new
+    hash = {
+    decryption: "hello world end",
+    date: "291018",
+    key: "08304"
+  }
+
+  assert_equal hash, enigma.crack("vjqtbeaweqihssi")
   end
 end
