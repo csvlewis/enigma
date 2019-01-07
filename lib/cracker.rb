@@ -8,20 +8,26 @@ class Cracker
   end
 
   def crack
-    assign_shifts
-    calculate_a_shift
-    require 'pry'; binding.pry
+    calculate_shift(@last_characters[0], " ")
+    calculate_shift(@last_characters[1], "e")
+    calculate_shift(@last_characters[2], "n")
+    calculate_shift(@last_characters[3], "d")
+
   end
 
   def assign_shifts
     if @message_array.count % 4 == 0
-      @letter_shifts = @last_characters
     elsif @message_array.count % 4 == 3
-      @letter_shifts = @last_characters.rotate
+      @letter_shifts.rotate
     elsif @message_array.count % 4 == 2
-      @letter_shifts = @last_characters.rotate.rotate
+      @letter_shifts.rotate.rotate
     elsif @message_array.count % 4 == 1
-      @letter_shifts = @last_characters.rotate.rotate.rotate
+      @letter_shifts.rotate.rotate.rotate
     end
+  end
+
+  def calculate_shift(encrypted, original)
+    shift = 27 - (@alphabet.index(encrypted) - @alphabet.index(original)).abs
+    require 'pry'; binding.pry
   end
 end
