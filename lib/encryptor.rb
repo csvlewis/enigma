@@ -37,7 +37,7 @@ class Encryptor
       letter = message_array[loop_num]
       index = @alphabet.index(letter.downcase)
       if index.nil?
-      else letter = apply_shift(index)
+      else letter = apply_negative_shift(index)
       end
       new_message << letter
       increase_count
