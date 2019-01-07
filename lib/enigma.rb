@@ -1,6 +1,7 @@
 require './lib/key'
 require './lib/offset'
 require './lib/encryptor'
+require './lib/cracker'
 
 class Enigma
   def encrypt(message, key = rand(10 ** 5).to_s.rjust(5,'0'), date = Time.now.strftime("%d%m%y"))
@@ -31,5 +32,12 @@ class Enigma
     offset = Offset.new(date)
     cracker = Cracker.new(message, offset)
     cracker.crack
+    encryptor = Encryptor.new(message, cracker.key, offset)
+    encryptor.decrypt
+    {
+      decryption: encryptor.new_message.join(""),
+      date: offset.date,
+      key: cracker.key.key
+    }
   end
 end
