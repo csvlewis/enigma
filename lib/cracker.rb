@@ -20,6 +20,7 @@ class Cracker
     gather_shifts
     rotate_shifts
     subtract_offsets
+    @shifts = convert_negative_shifts
     @key = generate_key
   end
 
@@ -42,12 +43,7 @@ class Cracker
   end
 
   def calculate_shift(encrypted, original)
-    shift = @alphabet.index(encrypted) - @alphabet.index(original)
-    if shift < 1
-      shift + 27
-    else
-      shift
-    end
+    @alphabet.index(encrypted) - @alphabet.index(original)
   end
 
   def subtract_offsets
@@ -67,6 +63,16 @@ class Cracker
         return key
       else
         next
+      end
+    end
+  end
+
+  def convert_negative_shifts
+    @shifts.map do |shift|
+      if shift.negative?
+        shift + 27
+      else
+        shift
       end
     end
   end

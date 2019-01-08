@@ -24,9 +24,7 @@ class Encryptor
     until message_array[loop_num].nil? do
       letter = message_array[loop_num]
       index = @alphabet.index(letter.downcase)
-      if index.nil?
-      else letter = apply_shift(index)
-      end
+      letter = apply_shift(index) unless index.nil?
       new_message << letter
       increase_count
     end
@@ -36,9 +34,7 @@ class Encryptor
     until message_array[loop_num].nil? do
       letter = message_array[loop_num]
       index = @alphabet.index(letter.downcase)
-      if index.nil?
-      else letter = apply_negative_shift(index)
-      end
+      letter = apply_negative_shift(index) unless index.nil?
       new_message << letter
       increase_count
     end
