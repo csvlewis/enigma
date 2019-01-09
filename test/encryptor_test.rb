@@ -12,54 +12,28 @@ class EncryptorTest < Minitest::Test
     assert_instance_of Encryptor, encryptor
   end
 
-  def test_it_has_an_alphabet
+  def test_it_has_attributes
     key = Key.new("02715")
     offset = Offset.new("040895")
     encryptor = Encryptor.new("hello world!", key, offset)
+    array = ["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d", "!"]
 
     assert_equal ("a".."z").to_a << " ", encryptor.alphabet
-  end
-
-  def test_it_can_calculate_shifts
-    key = Key.new("02715")
-    offset = Offset.new("040895")
-    encryptor = Encryptor.new("hello world!", key, offset)
-
     assert_equal 3, encryptor.shift_a
     assert_equal 27, encryptor.shift_b
     assert_equal 73, encryptor.shift_c
     assert_equal 20, encryptor.shift_d
-  end
-
-  def test_it_has_a_message_array
-    key = Key.new("02715")
-    offset = Offset.new("040895")
-    encryptor = Encryptor.new("hello world!", key, offset)
-
-    assert_equal 12, encryptor.message_array.count
-  end
-
-  def test_it_starts_without_a_new_message
-    key = Key.new("02715")
-    offset = Offset.new("040895")
-    encryptor = Encryptor.new("hello world!", key, offset)
-
+    assert_equal array, encryptor.message_array
     assert_equal [], encryptor.new_message
-  end
-
-  def test_loop_and_shift_num_start_at_0
-    key = Key.new("02715")
-    offset = Offset.new("040895")
-    encryptor = Encryptor.new("hello world!", key, offset)
-
-    assert_equal 0, encryptor.loop_num
-    assert_equal 0, encryptor.shift_num
   end
 
   def test_increase_shift_and_loop_count
     key = Key.new("02715")
     offset = Offset.new("040895")
     encryptor = Encryptor.new("hello world!", key, offset)
+
+    assert_equal 0, encryptor.loop_num
+    assert_equal 0, encryptor.shift_num
 
     encryptor.increase_count
     encryptor.increase_count
