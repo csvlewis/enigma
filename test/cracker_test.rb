@@ -43,15 +43,25 @@ class CrackerTest < Minitest::Test
     assert_equal encrypted[:key], cracker.key.key
   end
 
-  def test_it_can_gather_shifts
+  def test_it_can_gather_and_calculate_shifts
     offset = Offset.new("291018")
     cracker = Cracker.new("vjqtbeaweqihssi", offset)
 
     assert_equal [], cracker.shifts
 
-    cracker.crack
+    cracker.gather_shifts
 
-    assert_equal [8, 2, 3, 4], cracker.shifts
+    assert_equal [-19, 14, 5, 5], cracker.shifts
+
+    cracker.rotate_shifts
+
+    assert_equal [14, 5, 5, -19], cracker.shifts
+
+    cracker.subtract_offsets
+
+    assert_equal [8, 2, 3, -23], cracker.shifts
+
+    assert_equal [8, 2, 3, 4], cracker.convert_negative_shifts
   end
 
   def test_it_can_rotate_shifts
