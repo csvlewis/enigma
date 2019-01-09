@@ -9,11 +9,7 @@ class Enigma
     offset = Offset.new(date)
     encryptor = Encryptor.new(message, key, offset)
     encryptor.encrypt
-    {
-      encryption: encryptor.new_message.join(""),
-      key: key.key,
-      date: offset.date
-    }
+    { encryption: encryptor.new_message.join(""), key: key.key, date: offset.date }
   end
 
   def decrypt(message, key, date = Time.now.strftime("%d%m%y"))
@@ -21,11 +17,7 @@ class Enigma
     offset = Offset.new(date)
     encryptor = Encryptor.new(message, key, offset)
     encryptor.decrypt
-    {
-      decryption: encryptor.new_message.join(""),
-      key: key.key,
-      date: offset.date
-    }
+    { decryption: encryptor.new_message.join(""),key: key.key, date: offset.date }
   end
 
   def crack(message, date = Time.now.strftime("%d%m%y"))
@@ -34,10 +26,6 @@ class Enigma
     cracker.crack
     encryptor = Encryptor.new(message, cracker.key, offset)
     encryptor.decrypt
-    {
-      decryption: encryptor.new_message.join(""),
-      date: offset.date,
-      key: cracker.key.key
-    }
+    { decryption: encryptor.new_message.join(""), date: offset.date, key: cracker.key.key }
   end
 end
