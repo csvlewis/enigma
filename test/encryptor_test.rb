@@ -25,24 +25,10 @@ class EncryptorTest < Minitest::Test
     assert_equal 20, encryptor.shift_d
     assert_equal array, encryptor.message_array
     assert_equal [], encryptor.new_message
-  end
-
-  def test_increase_shift_and_loop_count
-    key = Key.new("02715")
-    offset = Offset.new("040895")
-    encryptor = Encryptor.new("hello world!", key, offset)
-
     assert_equal 0, encryptor.loop_num
     assert_equal 0, encryptor.shift_num
-
-    encryptor.increase_count
-    encryptor.increase_count
-    encryptor.increase_count
-    encryptor.increase_count
-
-    assert_equal 4, encryptor.loop_num
-    assert_equal 0, encryptor.shift_num
   end
+
 
   def test_it_can_encrypt_messages
     key = Key.new("02715")
@@ -60,5 +46,22 @@ class EncryptorTest < Minitest::Test
     encryptor.decrypt
 
     assert_equal "hello world!", encryptor.new_message.join("")
+  end
+
+  def test_increase_shift_and_loop_count
+    key = Key.new("02715")
+    offset = Offset.new("040895")
+    encryptor = Encryptor.new("hello world!", key, offset)
+
+    assert_equal 0, encryptor.loop_num
+    assert_equal 0, encryptor.shift_num
+
+    encryptor.increase_count
+    encryptor.increase_count
+    encryptor.increase_count
+    encryptor.increase_count
+
+    assert_equal 4, encryptor.loop_num
+    assert_equal 0, encryptor.shift_num
   end
 end
