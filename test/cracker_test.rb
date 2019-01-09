@@ -17,13 +17,12 @@ class CrackerTest < Minitest::Test
     cracker = Cracker.new("vjqtbeaweqihssi", offset)
     array = ["v", "j", "q", "t", "b", "e", "a", "w", "e", "q", "i", "h", "s", "s", "i"]
 
-    require 'pry'; binding.pry
     assert_equal ("a".."z").to_a << " ", cracker.alphabet
     assert_equal array, cracker.message_array
     assert_equal ["h", "s", "s", "i"], cracker.last_characters
     assert_equal offset, cracker.offset
     assert_equal [], cracker.shifts
-    assert_equal nil, cracker.key
+    assert_nil cracker.key
   end
 
   def test_it_can_crack_key_with_a_date
@@ -58,13 +57,13 @@ class CrackerTest < Minitest::Test
   def test_it_can_rotate_shifts
     offset = Offset.new("010101")
     cracker_1 = Cracker.new("m gxzb", offset)
-    cracker_2 = Cracker.new("m jsqlk", offset)
+    cracker_2 = Cracker.new("mylfp", offset)
 
     cracker_1.gather_shifts
     cracker_2.gather_shifts
 
     assert_equal [-20, 19, 12, -2], cracker_1.shifts
-    assert_equal [-8, 12, -2, 7], cracker_2.shifts
+    assert_equal [-2, 7, -8, 12], cracker_2.shifts
 
     cracker_1.rotate_shifts
     cracker_2.rotate_shifts
