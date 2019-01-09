@@ -1,4 +1,5 @@
 require './test/test_helper'
+require 'mocha/minitest'
 require './lib/enigma'
 
 class EnigmaTest < Minitest::Test
@@ -74,10 +75,12 @@ class EnigmaTest < Minitest::Test
   def test_it_can_crack_using_todays_date
     enigma = Enigma.new
     encrypted = enigma.encrypt("hello world end")
+    key = mock
+    key.stubs(:key).returns(encrypted[:key])
     hash = {
     decryption: "hello world end",
     date: Time.now.strftime("%d%m%y"),
-    key: "08304"
+    key: key.key
   }
 
   assert_equal hash, enigma.crack(encrypted[:encryption])
